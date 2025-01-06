@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from 'react'
-import SHOP_DATA from '../components/shop'
+import SHOP_DATA from '../shop'
 
 interface ProductType  {
     id: number;
