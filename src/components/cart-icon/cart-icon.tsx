@@ -5,6 +5,7 @@ const CartIcon = () => {
   return (
     <div className='cart-container'>
         <img src={shoppingBag} alt="shopping bag" />
+        <span className='cart-count'> 5</span>
     </div>
   )
 }
