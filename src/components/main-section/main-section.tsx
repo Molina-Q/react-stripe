@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router';
 import studioBag from '../../assets/studio-bag.png';
 import './main-section.styles.scss';
