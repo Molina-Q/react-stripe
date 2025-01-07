@@ -1,4 +1,4 @@
-import React from 'react'
+import './featured-product.styles.scss'
 
 interface ProductType {
     id: number;
@@ -8,7 +8,11 @@ interface ProductType {
     price: number;
 }
 
-const FeaturedProduct = (product: ProductType) => {
+interface FeaturedProductProps {
+    product: ProductType;
+}
+
+const FeaturedProduct: React.FC<FeaturedProductProps> = ({ product }) => {
     return (
         <div className='featured-product'>
             <div className='featured-image'>
