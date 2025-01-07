@@ -1,14 +1,6 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { ProductsContext } from '../../context/ProductsContextProvider'
 import FeaturedProduct from '../shared/featured-product';
-
-interface ProductType {
-    id: number;
-    title: string;
-    description: string;
-    imageUrl: string;
-    price: number;
-}
 
 const FeaturedCollection = () => {
     const { products } = useContext(ProductsContext);
