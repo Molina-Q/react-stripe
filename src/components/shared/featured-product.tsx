@@ -1,6 +1,6 @@
 import './featured-product.styles.scss'
 
-interface ProductType {
+export interface ProductType {
     id: number;
     title: string;
     description: string;
