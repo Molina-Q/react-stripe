@@ -1,16 +1,15 @@
+import { Route, Routes } from 'react-router-dom'
+import HomePage from './components/home-page'
 import './App.scss'
-import FeaturedCollection from './components/featured-collection/featured-collection'
-import Header from './components/header/Header'
-import Hero from './components/hero/Hero'
-import MainSection from './components/main-section/main-section'
+import NotFound from './components/not-found'
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Hero />
-      <MainSection />
-      <FeaturedCollection />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   )
 }
