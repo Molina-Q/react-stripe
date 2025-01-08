@@ -31,7 +31,7 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = ({ product }) => {
                 {
                     isInCart(product, cartItems) &&
                     <button
-                        className='button is-black nomad-btn'
+                        className='button is-white nomad-btn'
                         onClick={() => addProduct(product)}
                     >
                         ADD MORE
