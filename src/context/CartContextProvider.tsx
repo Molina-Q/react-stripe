@@ -1,46 +1,48 @@
 import React from 'react'
-import cartReducer from './CartReducer';
-import { ProductType } from './ProductsContextProvider';
-
+import cartReducer from './CartReducer'
+import { CartType, ProductType } from '../types'
 
 interface CartContextProviderProps {
-    children: React.ReactNode;
+    children: React.ReactNode
 }
 
-type CartItemType = {
-    cartItems: [];
-    itemCount: number;
-    total: number;
-};
+interface CartContextValue extends CartType {
+    addProduct: (product: ProductType) => void
+}
 
-export const CartContext = React.createContext<CartItemType>({
+export const CartContext = React.createContext<CartContextValue>({
     cartItems: [],
     itemCount: 0,
     total: 0,
-});
+    addProduct: () => undefined,
+})
 
-const initialState: CartItemType = {
+const initialState: CartType = {
     cartItems: [],
     itemCount: 0,
     total: 0,
-};
+}
 
 const CartContextProvider = ({ children }: CartContextProviderProps) => {
     const [state, dispatch] = React.useReducer(
-        cartReducer as unknown as React.Reducer<CartItemType, { type: string; payload?: ProductType }>,
+        cartReducer as unknown as React.Reducer<CartType, { type: string; payload?: ProductType }>,
         initialState
-    );
-    const addProduct = (product: ProductType) => dispatch({ type: 'ADD_ITEM', payload: product });
-    const contextValues = {
+    )
+
+    const addProduct = (product: ProductType) => {
+        dispatch({ type: 'ADD_ITEM', payload: product })
+    }
+
+    const contextValues: CartContextValue = {
         ...state,
         addProduct,
-    };
+    }
 
     return (
         <CartContext.Provider value={contextValues}>
             {children}
         </CartContext.Provider>
-    );
-};
+    )
+}
 
-export default CartContextProvider;
+export default CartContextProvider
