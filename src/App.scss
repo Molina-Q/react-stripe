@@ -1,7 +1,6 @@
 @charset "utf-8";
 
-@import '../node_modules/bulma/sass/themes/light.scss';
-@import '../node_modules/bulma/bulma.scss';
+@use '../node_modules/bulma/bulma.scss' as *;
 
 .app {
   position: relative;
@@ -72,6 +71,7 @@ img {
   margin-top: 0;
   margin-bottom: 10px;
   min-height: 44px;
+  border: 1px solid black;
 }
 
 //input styles
