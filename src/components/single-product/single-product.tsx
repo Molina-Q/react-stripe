@@ -3,8 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import Layout from '../shared/layout';
 import './single-product.styles.scss';
-import { ProductsContext } from '../../context/ProductsContextProvider';
-import { ProductType } from '../shared/featured-product';
+import { ProductsContext, ProductType } from '../../context/ProductsContextProvider';
+
 
 const SingleProduct = () => {
     const navigate = useNavigate();
@@ -27,7 +27,6 @@ const SingleProduct = () => {
 
     // while we check for product
     if (!product) { return null }
-    
     const { imageUrl, title, price, description } = product;
     const itemInCart = isInCart(product, cartItems);
 
