@@ -3,7 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import Layout from '../shared/layout';
 import './single-product.styles.scss';
-import { ProductsContext, ProductType } from '../../context/ProductsContextProvider';
+import { ProductsContext } from '../../context/ProductsContextProvider';
+import { CartContext } from '../../context/CartContextProvider';
+import { isInCart } from '../../helper';
+import { ProductType } from '../../types';
 
 
 const SingleProduct = () => {
