@@ -1,12 +1,13 @@
 import { createContext, ReactNode, useState } from 'react'
 import SHOP_DATA from '../shop'
 
-interface ProductType  {
+export interface ProductType {
     id: number;
     title: string;
     description: string;
     imageUrl: string;
     price: number;
+    quantity?: number;
 }
 
 type ProductsContextValue = {
