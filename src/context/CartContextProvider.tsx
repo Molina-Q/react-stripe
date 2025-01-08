@@ -1,5 +1,7 @@
 import React from 'react'
 import cartReducer from './CartReducer';
+import { ProductType } from './ProductsContextProvider';
+
 
 interface CartContextProviderProps {
     children: React.ReactNode;
@@ -24,9 +26,14 @@ const initialState: CartItemType = {
 };
 
 const CartContextProvider = ({ children }: CartContextProviderProps) => {
-    const [state, dispatch] = React.useReducer(cartReducer, initialState);
-    const contextValues: CartItemType = {
+    const [state, dispatch] = React.useReducer(
+        cartReducer as unknown as React.Reducer<CartItemType, { type: string; payload?: ProductType }>,
+        initialState
+    );
+    const addProduct = (product: ProductType) => dispatch({ type: 'ADD_ITEM', payload: product });
+    const contextValues = {
         ...state,
+        addProduct,
     };
 
     return (
