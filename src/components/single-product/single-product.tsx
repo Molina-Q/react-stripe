@@ -12,7 +12,7 @@ import { ProductType } from '../../types';
 const SingleProduct = () => {
     const navigate = useNavigate();
     const { products } = useContext(ProductsContext);
-    const { addProduct, cartItems, increase } = useContext(CartContext);
+    const { addProduct, cartItems } = useContext(CartContext);
     const { id } = useParams();
     const [product, setProduct] = useState<ProductType | null>(null);
 
@@ -59,7 +59,7 @@ const SingleProduct = () => {
                             <button
                                 className='button is-white nomad-btn'
                                 id='btn-white-outline'
-                                onClick={() => increase(product)}>
+                                >
                                 ADD MORE
                             </button>
                         }
