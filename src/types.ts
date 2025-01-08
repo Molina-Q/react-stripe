@@ -1,6 +1,10 @@
 export interface CartItemType {
     id: number;
-    quantity: number;
+    title: string;
+    description: string;
+    imageUrl: string;
+    price: number;
+    quantity?: number;
 }
 
 export type CartType = {
