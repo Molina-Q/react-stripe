@@ -1,5 +1,5 @@
 import React from 'react'
-import cartReducer from './CartReducer'
+import cartReducer, { sumItems } from './CartReducer'
 import { CartType, ProductType } from '../types'
 
 interface CartContextProviderProps {
@@ -25,11 +25,11 @@ export const CartContext = React.createContext<CartContextValue>({
     clearCart: () => undefined
 })
 
-const initialState: CartType = {
-    cartItems: [],
-    itemCount: 0,
-    total: 0,
-}
+const cartFromStorage = localStorage.getItem('cart')
+    ? JSON.parse(localStorage.getItem('cart') as string)
+    : [];
+
+const initialState = { cartItems: cartFromStorage, ...sumItems(cartFromStorage) };
 
 const CartContextProvider = ({ children }: CartContextProviderProps) => {
     const [state, dispatch] = React.useReducer(
@@ -48,12 +48,12 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
         dispatch({ type: 'DECREASE', payload: product })
     };
 
-    const removeProduct = (product: ProductType) => { 
-        dispatch({ type: 'REMOVE_ITEM', payload: product }) 
+    const removeProduct = (product: ProductType) => {
+        dispatch({ type: 'REMOVE_ITEM', payload: product })
     };
 
-    const clearCart = () => { 
-        dispatch({ type: 'CLEAR' }) 
+    const clearCart = () => {
+        dispatch({ type: 'CLEAR' })
     };
 
     const contextValues: CartContextValue = {
