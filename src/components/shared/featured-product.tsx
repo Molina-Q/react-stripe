@@ -3,6 +3,7 @@ import { CartContext } from '../../context/CartContextProvider';
 import { ProductType } from '../../types';
 import './featured-product.styles.scss'
 import { isInCart } from '../../helper';
+import { useNavigate } from 'react-router-dom';
 
 interface FeaturedProductProps {
     product: ProductType;
@@ -10,10 +11,10 @@ interface FeaturedProductProps {
 
 const FeaturedProduct: React.FC<FeaturedProductProps> = ({ product }) => {
     const { addProduct, cartItems } = useContext(CartContext);
-
+    const navigate = useNavigate();
     return (
         <div className='featured-product'>
-            <div className='featured-image'>
+            <div className='featured-image' onClick={() => navigate(`/product/${product.id}`)}>
                 <img src={product.imageUrl} alt={product.title} />
             </div>
             <div className='name-price'>
