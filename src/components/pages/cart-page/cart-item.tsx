@@ -5,6 +5,7 @@ interface CartItemProps extends ProductType {
     quantity?: number
     increase: (product: ProductType) => void
     decrease: (product: ProductType) => void
+    removeProduct: (product: ProductType) => void
 }
 
 const CartItem: React.FC<CartItemProps> = ({
@@ -16,6 +17,7 @@ const CartItem: React.FC<CartItemProps> = ({
     quantity = 0,
     increase,
     decrease,
+    removeProduct
 }) => {
     const product = { title, imageUrl, price, quantity, id, description } as ProductType;
 
@@ -39,7 +41,7 @@ const CartItem: React.FC<CartItemProps> = ({
                 {
                     quantity === 1 &&
                     <button
-                        className='btn-trash'>
+                        className='btn-trash' onClick={() => removeProduct(product)}>
                         <TrashIcon width='20px' />
                     </button>
                 }
