@@ -105,7 +105,14 @@ const cartReducer = (state: CartType, action: CartAction): CartType => {
         ...sumItems(updatedCartItems),
       };
     }
-
+    
+    case 'CLEAR':
+      localStorage.removeItem('cart');
+      return {
+        cartItems: [],
+        itemCount: 0,
+        total: 0,
+      }
 
     default:
       return state;
