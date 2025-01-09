@@ -10,7 +10,7 @@ interface FeaturedProductProps {
 }
 
 const FeaturedProduct: React.FC<FeaturedProductProps> = ({ product }) => {
-    const { addProduct, cartItems } = useContext(CartContext);
+    const { addProduct, cartItems, increase } = useContext(CartContext);
     const navigate = useNavigate();
     return (
         <div className='featured-product'>
@@ -33,7 +33,7 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = ({ product }) => {
                     isInCart(product, cartItems) &&
                     <button
                         className='button is-white nomad-btn'
-                        onClick={() => addProduct(product)}
+                        onClick={() => increase(product)}
                     >
                         ADD MORE
                     </button>
