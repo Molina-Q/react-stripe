@@ -48,14 +48,37 @@ const cartReducer = (state: CartType, action: CartAction): CartType => {
           ...sumItems([]),
         };
       }
-    
+
       const newCartItems = state.cartItems.map(item => {
         if (item.id === action.payload?.id) {
           return { ...item, quantity: (item.quantity ?? 0) + 1 };
         }
         return item;
       });
-    
+
+      return {
+        ...state,
+        cartItems: newCartItems,
+        ...sumItems(newCartItems),
+      };
+    }
+
+    case 'DECREASE': {
+      if (!state.cartItems) {
+        return {
+          ...state,
+          cartItems: [],
+          ...sumItems([]),
+        };
+      }
+
+      const newCartItems = state.cartItems.map((item) => {
+        if (item.id === action.payload?.id && (item.quantity ?? 0) > 1) {
+          return { ...item, quantity: (item.quantity ?? 0) - 1 };
+        }
+        return item;
+      });
+
       return {
         ...state,
         cartItems: newCartItems,
