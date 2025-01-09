@@ -11,6 +11,7 @@ interface CartContextValue extends CartType {
     increase: (product: ProductType) => void,
     decrease: (product: ProductType) => void,
     removeProduct: (product: ProductType) => void,
+    clearCart: () => void
 }
 
 export const CartContext = React.createContext<CartContextValue>({
@@ -21,6 +22,7 @@ export const CartContext = React.createContext<CartContextValue>({
     increase: () => undefined,
     decrease: () => undefined,
     removeProduct: () => undefined,
+    clearCart: () => undefined
 })
 
 const initialState: CartType = {
@@ -50,12 +52,17 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
         dispatch({ type: 'REMOVE_ITEM', payload: product }) 
     };
 
+    const clearCart = () => { 
+        dispatch({ type: 'CLEAR' }) 
+    };
+
     const contextValues: CartContextValue = {
         ...state,
         addProduct,
         increase,
         decrease,
         removeProduct,
+        clearCart
     }
 
     return (
