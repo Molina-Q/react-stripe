@@ -1,15 +1,17 @@
 import { CartItemType, CartType, ProductType } from "../types";
 
-const sumItems = (cartItems: CartItemType[]) => {
-  const itemCount = cartItems.reduce(
-    (total, product) => total + (product.quantity ?? 0),
-    0
-  );
-  const total = cartItems.reduce(
-    (total, product) => total + product.price * (product.quantity ?? 0),
-    0
-  );
-  return { itemCount, total };
+const storeCartItems = (cartItems: CartItemType[]) => {
+  const cart = cartItems.length > 0 ? cartItems : [];
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+
+export const sumItems = (cartItems: CartItemType[]) => {
+  storeCartItems(cartItems);
+  return {
+    itemCount: cartItems.reduce((total, prod) => total + (prod.quantity ?? 0), 0),
+    total: cartItems.reduce((total, prod) => total + (prod.price * (prod.quantity ?? 0)), 0)
+  };
 };
 
 type CartAction = {
@@ -105,7 +107,7 @@ const cartReducer = (state: CartType, action: CartAction): CartType => {
         ...sumItems(updatedCartItems),
       };
     }
-    
+
     case 'CLEAR':
       localStorage.removeItem('cart');
       return {
