@@ -8,8 +8,8 @@ import Total from './total';
 import CartItem from './cart-item';
 
 const CartPage = () => {
-    const { cartItems, itemCount, total, increase } = useContext(CartContext);
-    const funcs = { increase }
+    const { cartItems, itemCount, total, increase, decrease } = useContext(CartContext);
+    const funcs = { increase, decrease }
     return (
         <Layout>
             <>
