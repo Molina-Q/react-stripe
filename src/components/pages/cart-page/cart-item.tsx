@@ -4,10 +4,10 @@ import { PlusCircleIcon, MinusCircleIcon, TrashIcon } from '../../icons';
 interface CartItemProps extends ProductType {
     quantity?: number
     increase: (product: ProductType) => void
-    // decrease?: (id: number) => void
-  }
-  
-  const CartItem: React.FC<CartItemProps> = ({
+    decrease: (product: ProductType) => void
+}
+
+const CartItem: React.FC<CartItemProps> = ({
     id,
     title,
     description,
@@ -15,7 +15,8 @@ interface CartItemProps extends ProductType {
     price,
     quantity = 0,
     increase,
-  }) => {
+    decrease,
+}) => {
     const product = { title, imageUrl, price, quantity, id, description } as ProductType;
 
     return (
@@ -45,7 +46,7 @@ interface CartItemProps extends ProductType {
                 {
                     quantity > 1 &&
                     <button
-                        className='btn-decrease' >
+                        className='btn-decrease' onClick={() => decrease(product)}>
                         <MinusCircleIcon width='20px' />
                     </button>
                 }
