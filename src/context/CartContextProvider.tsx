@@ -7,7 +7,8 @@ interface CartContextProviderProps {
 }
 
 interface CartContextValue extends CartType {
-    addProduct: (product: ProductType) => void
+    addProduct: (product: ProductType) => void,
+    increase: (product: ProductType) => void,
 }
 
 export const CartContext = React.createContext<CartContextValue>({
@@ -15,6 +16,7 @@ export const CartContext = React.createContext<CartContextValue>({
     itemCount: 0,
     total: 0,
     addProduct: () => undefined,
+    increase: () => undefined,
 })
 
 const initialState: CartType = {
@@ -32,10 +34,14 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
     const addProduct = (product: ProductType) => {
         dispatch({ type: 'ADD_ITEM', payload: product })
     }
+    const increase = (product: ProductType) => {
+        dispatch({ type: 'INCREASE', payload: product })
+    };
 
     const contextValues: CartContextValue = {
         ...state,
         addProduct,
+        increase,
     }
 
     return (
