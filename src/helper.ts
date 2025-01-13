@@ -8,7 +8,7 @@ export const isInCart = (product: ProductType, cart: CartItemType[] | undefined)
 const API = 'http://localhost:8080';
 
 interface FetchOptions {
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+    method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
     body: any;
   }
   
