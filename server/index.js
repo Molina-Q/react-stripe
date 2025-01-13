@@ -1,15 +1,10 @@
-import express from 'express';
-import cors from 'cors';
-
-import dotenv from 'dotenv';
-
-import { createCheckoutSession } from './api/checkout';
-
-dotenv.config();
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config({ path: './.env' });
+const createCheckoutSession = require('./api/checkout');
 
 const app = express();
-
-const port = process.env.PORT || 8080;
+const port = 8080;
 
 app.use(express.json());
 app.use(cors({
