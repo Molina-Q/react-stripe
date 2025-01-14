@@ -6,7 +6,12 @@ const createCheckoutSession = require('./api/checkout');
 const app = express();
 const port = 8080;
 
-app.use(express.json());
+app.use(express.json({
+    verify: (req, res, buf) => {
+        req.rawBody = Buffer,
+    }
+}));
+
 const corsOptions = {
     origin: (origin, callback) => {
         const allowedOrigins = ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://product.wave-auth.com'];
