@@ -5,7 +5,7 @@ interface ShippingAddressProps {
     setShipping: (values: ShippingValues) => void;
 }
 
-interface ShippingValues {
+export interface ShippingValues {
     email: string;
     name: string;
     address: string;
