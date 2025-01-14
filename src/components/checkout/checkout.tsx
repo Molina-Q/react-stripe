@@ -5,11 +5,11 @@ import './checkout.styles.scss';
 import { CartContext } from '../../context/CartContextProvider';
 import Layout from '../shared/layout';
 import StripeCheckout from './stripe-checkout/stripe-checkout';
-import ShippingAddress from './custom-checkout/shipping-address';
+import ShippingAddress, { ShippingValues } from './custom-checkout/shipping-address';
 
 const Checkout = () => {
     const { itemCount, total, cartItems } = useContext(CartContext);
-    const [shipping, setShipping] = useState(null);
+    const [shipping, setShipping] = useState<ShippingValues | null>(null);
     const addressShown = {
         display: (shipping ? 'none' : 'block')
     }
