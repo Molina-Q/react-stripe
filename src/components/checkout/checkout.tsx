@@ -1,6 +1,4 @@
-import React, { useContext, useState } from 'react';
-
-
+import { useContext, useState } from 'react';
 import './checkout.styles.scss';
 import { CartContext } from '../../context/CartContextProvider';
 import Layout from '../shared/layout';
