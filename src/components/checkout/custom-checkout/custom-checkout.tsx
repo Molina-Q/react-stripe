@@ -158,7 +158,7 @@ const CustomCheckout: React.FC<CustomCheckoutProps> = ({ shipping, cartItems }) 
 
     return (
         <div>
-            {
+            {/* {
                 user && (cards && cards.length > 0) &&
                 <div>
                     <h4>Pay with saved card</h4>
@@ -174,7 +174,7 @@ const CustomCheckout: React.FC<CustomCheckoutProps> = ({ shipping, cartItems }) 
                         {processing ? 'PROCESSING' : 'PAY WITH SAVED CARD'}
                     </button>
                 </div>
-            }
+            } */}
             <h4>Enter Payment Details</h4>
             <div className='stripe-card'>
                 <CardNumberElement
