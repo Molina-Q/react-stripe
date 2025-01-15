@@ -8,11 +8,12 @@ import {
     useElements
 } from '@stripe/react-stripe-js';
 import { fetchFromAPI } from '../../../helper';
+import { CartItemType } from '../../../types';
 
 
 interface CustomCheckoutProps {
     shipping: any;
-    cartItems: any[];
+    cartItems: CartItemType[];
 }
 
 const CustomCheckout: React.FC<CustomCheckoutProps> = ({ shipping, cartItems }) => {
