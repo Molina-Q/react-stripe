@@ -13,7 +13,7 @@ import { CartItemType } from '../../../types';
 
 interface CustomCheckoutProps {
     shipping: any;
-    cartItems: CartItemType[];
+    cartItems: CartItemType [];
 }
 
 const CustomCheckout: React.FC<CustomCheckoutProps> = ({ shipping, cartItems }) => {
