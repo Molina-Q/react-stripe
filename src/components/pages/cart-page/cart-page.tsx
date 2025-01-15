@@ -1,7 +1,5 @@
 import { useContext } from 'react';
-
 import Layout from '../../shared/layout';
-
 import './cart-page.styles.scss';
 import { CartContext } from '../../../context/CartContextProvider';
 import Total from './total';
