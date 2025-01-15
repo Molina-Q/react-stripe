@@ -9,7 +9,7 @@ const API = 'http://localhost:8080';
 
 interface FetchOptions {
     method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
-    body: any;
+    body?: any;
   }
   
   export async function fetchFromAPI(endpoint: string, opts?: FetchOptions): Promise<any> {
