@@ -197,7 +197,7 @@ const CustomCheckout: React.FC<CustomCheckoutProps> = ({ shipping, cartItems }) 
                     onChange={cardHandleChange}
                 />
             </div>
-            {
+            {/* {
                 user &&
                 <div className='save-card'>
                     <label>Save Card</label>
@@ -207,7 +207,7 @@ const CustomCheckout: React.FC<CustomCheckoutProps> = ({ shipping, cartItems }) 
                         onChange={e => setSavedCard(e.target.checked)}
                     />
                 </div>
-            }
+            } */}
             <div className='submit-btn'>
                 <button
                     disabled={processing}
