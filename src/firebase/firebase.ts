@@ -2,6 +2,7 @@ import "firebase/firestore";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
+import { User } from 'firebase/auth';
 
 interface AdditionalData {
     [key: string]: any;
@@ -23,7 +24,7 @@ const firestore = firebase.firestore();
 const auth = firebase.auth();
 
 const createUserProfileDocument = async (
-    userAuth: firebase.User | null,
+    userAuth: User | null,
     additionalData?: AdditionalData
 ): Promise<firebase.firestore.DocumentReference | undefined> => {
     if (!userAuth) { return; }
