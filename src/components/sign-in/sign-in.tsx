@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../shared/layout';
 import { Formik, FormikHelpers } from 'formik';
-import { auth } from '../../firebase';
+
 import '../sign-up/sign-up.styles.scss';
+import { auth } from '../../firebase/firebase';
 
 interface SignInValues {
   email: string;
