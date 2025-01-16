@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import Layout from '../shared/layout';
-import { Formik } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
 import { auth, createUserProfileDocument } from '../../firebase';
-import { withRouter } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './sign-up.styles.scss';
 
-const validate = values => {
-    const errors = {};
+interface SignUpValues {
+    firstname: string;
+    email: string;
+    password: string;
+}
+
+const validate = (values: SignUpValues) => {
+    const errors: Partial<SignUpValues> = {};
     if (!values.email) {
         errors.email = 'Required';
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
@@ -17,26 +23,27 @@ const validate = values => {
     return errors;
 }
 
-const SignUp = ({ history: { push } }) => {
-    const [error, setError] = useState(null);
-    const initialValues = {
+const SignUp: React.FC = () => {
+    const [error, setError] = useState<Error | null>(null);
+    const navigate = useNavigate();
+    const initialValues: SignUpValues = {
         firstname: '',
         email: '',
         password: '',
     }
 
-    const handleSignUp = async (values, { setSubmitting }) => {
+    const handleSignUp = async (values: SignUpValues, { setSubmitting }: FormikHelpers<SignUpValues>) => {
         const { firstname, email, password } = values;
 
         try {
-            const { user } = await auth.createUserWithEmailAndPassword(email, password)
+            const { user } = await auth.createUserWithEmailAndPassword(email, password);
             await createUserProfileDocument(user, { displayName: firstname });
-            push('/shop');
+            navigate('/shop');
             setSubmitting(false);
         } catch (error) {
             console.log('error', error);
             setSubmitting(false);
-            setError(error);
+            setError(error as Error);
         }
     }
 
@@ -110,4 +117,4 @@ const SignUp = ({ history: { push } }) => {
     );
 }
 
-export default withRouter(SignUp);
+export default SignUp;
