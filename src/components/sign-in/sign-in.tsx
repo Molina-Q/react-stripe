@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../shared/layout';
-import { Formik } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
 import { auth } from '../../firebase';
 import '../sign-up/sign-up.styles.scss';
 
-const validate = values => {
-  const errors = {};
+interface SignInValues {
+  email: string;
+  password: string;
+}
+
+const validate = (values: SignInValues) => {
+  const errors: Partial<SignInValues> = {};
   if (!values.email) {
     errors.email = 'Required';
   } else if (
@@ -17,28 +22,28 @@ const validate = values => {
   return errors;
 }
 
-const SignIn = ({ history: { push } }) => {
-  const [error, setError] = useState(null);
-  const initialValues = {
+const SignIn: React.FC = () => {
+  const [error, setError] = useState<Error | null>(null);
+  const navigate = useNavigate();
+  const initialValues: SignInValues = {
     email: '',
     password: '',
   };
 
-  const handleSubmit = async (values, { setSubmitting }) => {
+  const handleSubmit = async (values: SignInValues, { setSubmitting }: FormikHelpers<SignInValues>) => {
     console.log('values', values);
     const { email, password } = values;
     try {
       //signin with firebase
       await auth.signInWithEmailAndPassword(email, password);
       setSubmitting(false);
-      push('/shop');
+      navigate('/shop');
       
     } catch (error) {
       console.log('error', error);
       setSubmitting(false);
-      setError(error);
+      setError(error as Error);
     }
-    
   }
 
   return (
@@ -104,4 +109,4 @@ const SignIn = ({ history: { push } }) => {
   );
 }
 
-export default withRouter(SignIn);
+export default SignIn;
