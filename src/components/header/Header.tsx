@@ -1,8 +1,14 @@
-import { Link } from 'react-router-dom'
-import './header.styles.scss'
-import CartIcon from '../cart-icon/cart-icon'
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import CartIcon from '../cart-icon/cart-icon';
+
+import './header.styles.scss';
+import { UserContext } from '../../context/userContextProvider';
+import { auth } from '../../firebase/firebase';
 
 const Header = () => {
+    const { user } = useContext(UserContext);
+
     return (
         <nav className='nav-menu container'>
             <div className='logo'>
@@ -10,15 +16,41 @@ const Header = () => {
             </div>
             <ul>
                 <li>
-                    <Link to='/'>Home</Link>
+                    <Link to='/'>
+                        Home
+                    </Link>
                 </li>
                 <li>
-                    <Link to='/shop'>Shop</Link>
+                    <Link to='/shop'>
+                        Shop
+                    </Link>
                 </li>
+                {
+                    !user &&
+                    <li>
+                        <Link to='/sign-in'>
+                            Sign In
+                        </Link>
+                    </li>
+                }
+                {
+                    user &&
+                    <li onClick={() => auth.signOut()}>
+                        Sign Out
+                    </li>
+                }
+                {
+                    !user &&
+                    <li>
+                        <Link to='/sign-up'>
+                            Sign Up
+                        </Link>
+                    </li>
+                }
             </ul>
             <CartIcon />
         </nav>
-    )
+    );
 }
 
-export default Header
+export default Header;
