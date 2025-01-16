@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Layout from '../shared/layout';
 import { Formik, FormikHelpers } from 'formik';
-// import { auth, createUserProfileDocument } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import './sign-up.styles.scss';
+import { auth, createUserProfileDocument } from '../../firebase/firebase';
 
 interface SignUpValues {
     firstname: string;
@@ -33,11 +33,11 @@ const SignUp: React.FC = () => {
     }
 
     const handleSignUp = async (values: SignUpValues, { setSubmitting }: FormikHelpers<SignUpValues>) => {
-        // const { firstname, email, password } = values;
+        const { firstname, email, password } = values;
 
         try {
-            // const { user } = await auth.createUserWithEmailAndPassword(email, password);
-            // await createUserProfileDocument(user, { displayName: firstname });
+            const { user } = await auth.createUserWithEmailAndPassword(email, password);
+            await createUserProfileDocument(user, { displayName: firstname });
             navigate('/shop');
             setSubmitting(false);
         } catch (error) {
