@@ -9,15 +9,16 @@ import {
 } from '@stripe/react-stripe-js';
 import { fetchFromAPI } from '../../../helper';
 import { CartItemType } from '../../../types';
+import { UserContext } from '../../../context/userContextProvider';
 
 
 interface CustomCheckoutProps {
     shipping: any;
-    cartItems: CartItemType [];
+    cartItems: CartItemType[];
 }
 
 const CustomCheckout: React.FC<CustomCheckoutProps> = ({ shipping, cartItems }) => {
-    // const { user } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [processing, setProcessing] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [clientSecret, setClientSecret] = useState<string | null>(null);
@@ -31,19 +32,19 @@ const CustomCheckout: React.FC<CustomCheckoutProps> = ({ shipping, cartItems }) 
 
     useEffect(() => {
         const items = cartItems.map(item => ({ price: item.price, quantity: item.quantity }));
-        // if (user) {
-        //     const savedCards = async () => {
-        //         try {
-        //             const cardsList = await fetchFromAPI('get-payment-methods', {
-        //                 method: 'GET',
-        //             });
-        //             setCards(cardsList);
-        //         } catch (error) {
-        //             console.log(error);
-        //         }
-        //     }
-        //     savedCards();
-        // }
+        if (user) {
+            const savedCards = async () => {
+                try {
+                    const cardsList = await fetchFromAPI('get-payment-methods', {
+                        method: 'GET',
+                    });
+                    setCards(cardsList);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            savedCards();
+        }
 
         if (shipping) {
             const body = {
@@ -158,7 +159,7 @@ const CustomCheckout: React.FC<CustomCheckoutProps> = ({ shipping, cartItems }) 
 
     return (
         <div>
-            {/* {
+            {
                 user && (cards && cards.length > 0) &&
                 <div>
                     <h4>Pay with saved card</h4>
@@ -174,7 +175,7 @@ const CustomCheckout: React.FC<CustomCheckoutProps> = ({ shipping, cartItems }) 
                         {processing ? 'PROCESSING' : 'PAY WITH SAVED CARD'}
                     </button>
                 </div>
-            } */}
+            }
             <h4>Enter Payment Details</h4>
             <div className='stripe-card'>
                 <CardNumberElement
@@ -197,7 +198,7 @@ const CustomCheckout: React.FC<CustomCheckoutProps> = ({ shipping, cartItems }) 
                     onChange={cardHandleChange}
                 />
             </div>
-            {/* {
+            {
                 user &&
                 <div className='save-card'>
                     <label>Save Card</label>
@@ -207,7 +208,7 @@ const CustomCheckout: React.FC<CustomCheckoutProps> = ({ shipping, cartItems }) 
                         onChange={e => setSavedCard(e.target.checked)}
                     />
                 </div>
-            } */}
+            }
             <div className='submit-btn'>
                 <button
                     disabled={processing}
